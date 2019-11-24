@@ -8,7 +8,11 @@ class Db
     protected static function connect($sql_host, $sql_user, $sql_pass, $sql_dbname)
     {
         if (self::$connection == null) {
-            //echo "<br>try connect db";
+            echo "<br>try connect db";
+            echo "<br>{$sql_host}";
+            echo "<br>{$sql_user}";
+            echo "<br>{$sql_pass}";
+            echo "<br>{$sql_dbname}";
             self::$connection = new \mysqli($sql_host, $sql_user, $sql_pass, $sql_dbname);
             //echo "try connect done";
 

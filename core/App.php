@@ -1,36 +1,35 @@
 <?php
 
-namespace core;
+use common\Logger;
 
-use \controllers;
+//Реестр для сохранения инстансов объектов
+class App {
+    //Объявление статической переменной доступной только в классе
+    protected static $instance = array();//Хранилище классов
+    public $logger;
 
-class App 
-{
-
-    public static function start()
+    public function __construct()
     {
-        echo 'start done';
-
-        if ($_SERVER['REQUEST_URI'] == '/') {
-            echo ' showing default page ' ;
-            $view = new View();
-            $view->show('defaultView');  
-        } else {
-            echo '<pre>';
-            $params = explode('/', $_SERVER['REQUEST_URI']);
-            print_r($params);
-            $controller = $params[1] . "Controller";
-            $action = $params[2];
-            
-            echo $controller;
-
-            $controller = "\controllers\defaut";
-
-            $controller::$action();
-            
-            echo '</pre>';
-        }
-
+        echo "<br>App constructor";
+        $this->logger = new Logger();
     }
 
+    //Функция получения класса
+    static function get($name){
+        echo "<br>try get {$name}";
+        if(self::$instance[$name]){
+            //echo "<br>in if {$name}";
+            return self::$instance[$name];
+        }else{
+            echo "<br>out if {$name}";
+            //Создание и сохранение объекта класса
+            return self::add($name, new $name() );
+        }
+    }
+
+    //Сохранение объекта класса в хранилище
+    static function add($name,$val){
+        //echo "<br>try add {$name}";
+        return self::$instance[$name] = $val;
+    }
 }
