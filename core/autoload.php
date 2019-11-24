@@ -22,7 +22,7 @@ function autoload($class_name) {
     }
     else {
         //Не найден контроллер
-        echo "<br>ERROR, Controller not found {$class_name}";
+        //echo "<br>ERROR, Controller not found {$class_name}";
         App::get('Controller')->error404();
         die();
     }

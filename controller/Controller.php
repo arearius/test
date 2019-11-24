@@ -21,11 +21,11 @@ class Controller
             //Название вызывающего класса
 
             $class = mb_substr( get_class($this), 0, -10);
-            echo "<br> Look for " . $_SERVER['DOCUMENT_ROOT'] . "/views/{$class}/{$name}.php";
+            //echo "<br> Look for " . $_SERVER['DOCUMENT_ROOT'] . "/views/{$class}/{$name}.php";
             $tpl = $_SERVER['DOCUMENT_ROOT'] . "/views/{$class}/{$name}.php";
         }
         if (file_exists($tpl)) {
-            echo "<br> Template found";
+            //echo "<br> Template found";
             if ($args) {
                 //Распаковка переданных в шаблонизатор переменных, в область видимости шаблона
                 extract($args);
@@ -34,7 +34,7 @@ class Controller
             //print_r ($args);
             include $tpl;
         } else {
-            echo "<br>not found tpl {$class}/{$name}";
+            //echo "<br>not found tpl {$class}/{$name}";
         }
         return ob_get_clean();
     }

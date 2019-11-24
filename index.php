@@ -7,12 +7,10 @@ session_start();
 include __DIR__ . '\init.php';
 
 
-$data = explode('/' ,$_REQUEST['uri']);
+$data = explode('/' ,$_SERVER['REQUEST_URI']);
 $_REQUEST['controller'] = $data[1];
 $_REQUEST['action'] = $data[2];
 
 
 App::get('AppController')->setRequest($_REQUEST);
 App::get('AppController')->page($_REQUEST['controller'], $_REQUEST['action'],$_REQUEST);
-
-

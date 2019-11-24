@@ -22,13 +22,13 @@ class Logger extends Db
                              config::$logs['db_config']['db_name']);
         
         
-        echo "<br>Connect done";
+        //echo "<br>Connect done";
 
         $this->enabled = config::$logs['enabled']; 
-        $this->enabled = config::$logs['types']; 
+        $this->types = config::$logs['types']; 
 
         if (!parent::checkTable(config::$logs['db_config']['table_name'])) {
-            echo "try create tables";
+            //echo "try create tables";
             parent::createTable(config::$logs['db_config']['table_name'], 
                                 config::$tablesStructure[config::$logs['db_config']['table_name']]['fields'],
                                 config::$tablesStructure[config::$logs['db_config']['table_name']]['primary_key']);
@@ -38,9 +38,14 @@ class Logger extends Db
 
     public function log($message, $type = "INFO")
     {
+        $type = config::$logs['types'][$type];
         //echo "<br> try insert log in table $type";
         if ($this->enabled) {
-            //parent::insertToTable($message, $type);
+            $data = [
+                'type' => $type,
+                'text' => $message
+            ];
+            parent::insertToTable(config::$logs['db_config']['table_name'], $data);
         }
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-class AppController extends Controller
+class TaskController extends Controller
 {
 
     private $logger;
@@ -8,14 +8,15 @@ class AppController extends Controller
     function __construct(){
         $this->logger = new Logger();
         //echo "<br>APP Controller constructor";
-        $this->model = App::get('Application');
+        $this->model = App::get('Task');
+        $this->logger->log('TaskController construct done');
     }
 
     function page($controller,$action,$param){
-        //echo "<br>APP Controller page method start";
+        //echo "<br>Task Controller page method start";
         //По умолчанию главный контроллер (индексная страница)
         if(!$controller){
-            $controller = 'App';
+            $controller = 'Task';
         }
         // И метод default (по умолчанию)
         if(!$action){
@@ -24,7 +25,7 @@ class AppController extends Controller
 
         $method_name = $action . "Action" ;
         $controller_name = $controller . "Controller";
-        //echo "<br>APP Controller page method";
+        //echo "<br>Task Controller page method";
         if(method_exists(App::get($controller_name), $method_name)){
             //echo "<br> Method from url exist";
             //Создаётся центральная часть
@@ -42,7 +43,7 @@ class AppController extends Controller
 
         }else{
             //Перебрасываем пользователя на страницу 404
-            echo "<br>Look for {$controller_name} controller and {$method_name} method failed";
+            //echo "<br>Look for {$controller_name} controller and {$method_name} method failed";
             $this->error404();
         }
 
@@ -69,17 +70,10 @@ class AppController extends Controller
     function defaultAction($param){
         $this->setTitle("Title for default action default controller");
         //echo '<br>default action';
-        echo $this->view('default',array(
+        echo $this->view('main',array(
             'html' => $html,
             'title' => $this->getTitle()
         ), 0);
-    }
-
-    function indexAction($param){
-
-        $this->logger->log("AppController indexAction");
-        $this->setTitle("my new tittle from Controller");
-        echo $this->view('default');
     }
 
     function error404(){

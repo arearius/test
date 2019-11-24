@@ -8,11 +8,11 @@ class Db
     protected static function connect($sql_host, $sql_user, $sql_pass, $sql_dbname)
     {
         if (self::$connection == null) {
-            echo "<br>try connect db";
+            /*echo "<br>try connect db";
             echo "<br>{$sql_host}";
             echo "<br>{$sql_user}";
             echo "<br>{$sql_pass}";
-            echo "<br>{$sql_dbname}";
+            echo "<br>{$sql_dbname}";*/
             self::$connection = new \mysqli($sql_host, $sql_user, $sql_pass, $sql_dbname);
             //echo "try connect done";
 
@@ -87,6 +87,10 @@ class Db
 
     protected static function insertToTable($table, $values)
     {
+        echo '<pre>';
+        print_r($values);
+        echo '</pre>';
+        echo $table;
 
         $sql = "INSERT INTO `{$table}` " ;
         $valuesStr = "(";
