@@ -4,6 +4,7 @@ class TaskController extends Controller
 {
 
     private $logger;
+    private $model;
 
     function __construct(){
         $this->logger = new Logger();

@@ -87,11 +87,6 @@ class Db
 
     protected static function insertToTable($table, $values)
     {
-        echo '<pre>';
-        print_r($values);
-        echo '</pre>';
-        echo $table;
-
         $sql = "INSERT INTO `{$table}` " ;
         $valuesStr = "(";
         $paramsStr = "(";
