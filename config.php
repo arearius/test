@@ -32,13 +32,13 @@ class Config
 		        'status' => 'tinyint(1) DEFAULT NULL',
                 'modified' => 'tinyint(1) DEFAULT NULL'
             ],
-            'primaryKey' => 'id'
+            'primary_key' => 'id'
         ],
 		'auth' => [
 			'fields' => [
-			'session' => 'varchar(40) COLLATE utf8_bin NOT NULL, '
+			    'session' => 'varchar(40) COLLATE utf8_bin NOT NULL, '
 			],
-			'primaryKey' => 'session'
+			'primary_key' => 'session'
 		]
     ];
 
@@ -48,14 +48,7 @@ class Config
 
     public static $logs = [
         'enabled' => true,
-        'db_config' => [
-            'host' => 'localhost',
-            'port' => '3306',
-            'user' => 'root',
-            'password' => '',
-            'db_name' => 'test',
-            'table_name' => 'logs'
-        ],
+        'table_name' => 'logs',
         'types' => [
             'INFO' => 1,
             'DEBUG' => 2,

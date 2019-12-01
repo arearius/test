@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Rearius
- * Date: 06.10.2018
- * Time: 20:15
- */
 
 class Logger extends Db
 {
@@ -16,10 +10,10 @@ class Logger extends Db
     {
         //echo "logger constructor";
         //echo "<br>try connect";
-        echo parent::connect(config::$logs['db_config']['host'], 
-                             config::$logs['db_config']['user'], 
-                             config::$logs['db_config']['password'], 
-                             config::$logs['db_config']['db_name']);
+        echo parent::connect(config::$db['host'], 
+                             config::$db['user'], 
+                             config::$db['password'], 
+                             config::$db['db_name']);
         
         
         //echo "<br>Connect done";
@@ -27,11 +21,11 @@ class Logger extends Db
         $this->enabled = config::$logs['enabled']; 
         $this->types = config::$logs['types']; 
 
-        if (!parent::checkTable(config::$logs['db_config']['table_name'])) {
-            //echo "try create tables";
-            parent::createTable(config::$logs['db_config']['table_name'], 
-                                config::$tablesStructure[config::$logs['db_config']['table_name']]['fields'],
-                                config::$tablesStructure[config::$logs['db_config']['table_name']]['primary_key']);
+        if (!parent::checkTable(config::$logs['table_name'])) {
+            echo "<br>try create table logs<br>";
+            parent::createTable(config::$logs['table_name'], 
+                                config::$tablesStructure[config::$logs['table_name']]['fields'],
+                                config::$tablesStructure[config::$logs['table_name']]['primary_key']);
         }
 
     }
@@ -45,7 +39,7 @@ class Logger extends Db
                 'type' => $type,
                 'text' => $message
             ];
-            parent::insertToTable(config::$logs['db_config']['table_name'], $data);
+            parent::insertToTable(config::$logs['table_name'], $data);
         }
     }
 

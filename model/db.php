@@ -34,11 +34,12 @@ class Db
         }
 
         $sql .= " PRIMARY KEY(`$primaryKey`))";
+        echo $sql . PHP_EOL;
         self::$connection->query($sql);
     }
 
     protected static function checkTable($tableName){
-        $sql = "CHECK TABLE tasks.$tableName";
+        $sql = "CHECK TABLE $tableName";
         $result = mysqli_fetch_assoc(self::$connection->query($sql));
         if ($result['Msg_text'] === 'OK') return true;
         return false;
